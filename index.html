@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta de Cobro - Gian Visuals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* PALETA SALEADS STYLE */
+            --bg-main: #05010f;
+            --bg-card: #130626;
+            --gradient-primary: linear-gradient(135deg, #6a00f4, #c200c9, #00dde6);
+            --gradient-text: linear-gradient(90deg, #a855f7, #ec4899, #06b6d4);
+            --text-primary: #ffffff;
+            --text-secondary: #c0b6d1;
+            --border-color: rgba(168, 85, 247, 0.2); 
+            --glow-color: rgba(168, 85, 247, 0.6);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .invoice-container {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 850px;
+            padding: 60px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(168, 85, 247, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de luz de fondo */
+        .invoice-container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-primary);
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .brand-zone {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box {
+            width: 45px; height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900; color: white;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .invoice-title-box { text-align: right; }
+        
+        .gradient-text {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+
+        h2.section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #d8b4fe;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2.section-label::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .info-block p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .info-block strong { color: white; }
+
+        /* TABLA SALEADS STYLE */
+        .table-glass {
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            padding: 5px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #d8b4fe;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 20px 15px;
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        /* TOTAL SECTION */
+        .total-container {
+            text-align: right;
+            margin: 40px 0;
+        }
+
+        .total-price {
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .tax-disclaimer {
+            background: rgba(106, 0, 244, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 0,5;
+        }
+
+        .payment-card {
+            background: rgba(106, 0, 244, 0.1);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .signature-area {
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            width: 250px;
+        }
+
+        .btn-download {
+            margin-top: 40px;
+            padding: 18px 45px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: white;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--glow-color);
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--glow-color);
+        }
+
+        /* PRINT CONFIG */
+        @media print {
+            @page { margin: 1cm; }
+            body { background: white !important; padding: 0; }
+            .invoice-container {
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0;
+                max-width: 100%;
+            }
+            .invoice-container::before { display: none; }
+            .gradient-text, .total-price {
+                background: none !important;
+                -webkit-text-fill-color: black !important;
+                color: black !important;
+            }
+            .logo-box {
+                background: black !important;
+                box-shadow: none !important;
+            }
+            .tax-disclaimer, .payment-card, .table-glass {
+                background: white !important;
+                border: 1px solid #eee !important;
+                color: black !important;
+            }
+            p, strong, td, th, h2 { color: black !important; }
+            .btn-download { display: none; }
+            h2.section-label::after { background: #eee; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invoice-container">
+        <header>
+            <div class="brand-zone">
+                <div class="logo-box">G</div>
+                <div class="brand-name">GIAN VISUALS</div>
+            </div>
+            <div class="invoice-title-box">
+                <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">CUENTA DE COBRO</p>
+                <div class="gradient-text" style="font-size: 32px;">N.° 001</div>
+                <p style="font-size: 13px; margin-top: 5px;">Expedición: <span id="fecha"></span></p>
+            </div>
+        </header>
+
+        <div class="info-grid">
+            <div class="info-block">
+                <h2 class="section-label">Proveedor</h2>
+                <p><strong>Gian Visuals</strong></p>
+                <p>C.C. 1.055.046.158</p>
+                <p>Contacto@gianvisuals.com</p>
+                <p>Bogotá D.C., Colombia</p>
+            </div>
+            <div class="info-block">
+                <h2 class="section-label">Cliente</h2>
+                <p><strong>Julian Alvarez Velasco</strong></p>
+                <p>Identificación: N.A.</p>
+                <p>Bogotá D.C., Colombia</p>
+            </div>
+        </div>
+
+        <h2 class="section-label">Descripción del servicio</h2>
+        <div class="table-glass">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th style="text-align: right;">Valor (COP)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: white;">Prestación de servicios de fotografía y filmmaking básico</td>
+                        <td style="text-align: right; font-weight: 700; color: white;">$172.500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tax-disclaimer">
+            <strong>Información tributaria:</strong><br>
+            El prestador del servicio no es responsable de IVA según normativa vigente. El valor cobrado no incluye impuestos adicionales. No aplica retención en la fuente para este servicio.
+        </div>
+
+        <div class="total-container">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; font-weight: 700;">TOTAL A PAGAR</p>
+            <div class="total-price gradient-text">$172.500 COP</div>
+            <p style="font-size: 13px; color: var(--text-secondary); font-style: italic;">
+                Son: CIENTO SETENTA Y DOS MIL QUINIENTOS PESOS M/CTE
+            </p>
+        </div>
+
+        <p style="text-align: center; font-size: 11px; color: var(--text-muted); margin-bottom: 40px;">
+            "El valor descrito corresponde a servicios efectivamente prestados, conforme a lo acordado entre las partes."
+        </p>
+
+        <h2 class="section-label">Forma de Pago</h2>
+        <div class="payment-card">
+            <div>
+                <p style="color: white; font-weight: 700; font-size: 14px; margin-bottom: 10px;">Transferencia Bancaria</p>
+                <p>Banco: <strong>Falabella</strong></p>
+                <p>Cuenta: Ahorros</p>
+                <p>N°: 111120650302</p>
+            </div>
+            
+            
+            <div style="border-left: 1px solid rgba(255,255,255,0.05); padding-left: 20px;">
+                <p style="color: white; font-weight: 700; font-size: 14px; margin-bottom: 10px;">Billeteras Digitales</p>
+                <p>Nequi / Daviplata / Bre-B</p>
+                <p><strong>320 926 3077</strong></p>
+                <p>Titular: Gian Visuals</p>
+            </div>
+        </div>
+
+        <div class="signature-area">
+            <p style="font-size: 14px; margin-bottom: 5px;">Atentamente,</p>
+            <p style="font-weight: 800; color: white; font-size: 18px; margin: 0;">Gian Visuals</p>
+            <p style="font-size: 13px; color: var(--text-secondary);">C.C. 1.055.046.158</p>
+        </div>
+    </div>
+
+    <button class="btn-download" onclick="window.print()">DESCARGAR CUENTA PDF</button>
+
+    <script>
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-CO', options);
+    </script>
+</body>
+</html>
